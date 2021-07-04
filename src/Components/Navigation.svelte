@@ -25,7 +25,7 @@
 </script>
 
 <AppBar>
-    <span slot="title">Weighttracker</span>
+    <span slot="title">Very good Weighttracker</span>
     <div slot="extension">
         <Tabs class="green-text" bind:value={tabIndex} fixedTabs>
             <div slot="tabs">

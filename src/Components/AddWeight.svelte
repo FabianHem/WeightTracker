@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {Icon, Button, Dialog, TextField} from 'svelte-materialify';
+        import {Icon, Button, Dialog, TextField} from 'svelte-materialify';
     import {mdiPlusThick} from '@mdi/js';
     import {storeWeights} from '../Store/store';
     import {onMount} from 'svelte';

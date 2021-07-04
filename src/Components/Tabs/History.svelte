@@ -8,11 +8,16 @@
     });
 </script>
 
-<h3>History</h3>
-{#each weights as weightEntryProp}
-    <WeightEntry weightEntry={weightEntryProp}/>
-{/each}
+<div class="d-flex flex-column justify-center align-stretch">
+    <h3>History</h3>
+    {#each weights as weightEntryProp}
+        <WeightEntry weightEntry={weightEntryProp}/>
+    {/each}
+</div>
 
 <style>
-
+    h3 {
+        align-self: center;
+        padding: 8px;
+    }
 </style>

@@ -31,15 +31,17 @@
     });
 </script>
 
-<h4>Weekly averages</h4>
-
-{#each weekWeights as week}
-    <ListItem>
-        {week.week} - {week.weight.toFixed(1)}
-    </ListItem>
-{/each}
-
+<div class="d-flex flex-column justify-center align-center">
+    <h4>Weekly averages</h4>
+    {#each weekWeights as week}
+        <ListItem>
+            {week.week} - {week.weight.toFixed(1)}
+        </ListItem>
+    {/each}
+</div>
 
 <style>
-
+    h4 {
+        padding: 8px;
+    }
 </style>

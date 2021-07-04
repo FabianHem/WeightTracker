@@ -18,7 +18,7 @@ const initEntriesForTesting: WeightEntryType[] = [
     comment: 'week 4'
   },
   {
-    weight: 1500,
+    weight: 85,
     date: new Date(new Date().setDate(new Date().getDate() - 4)),
     comment: 'week 4'
   },
@@ -33,8 +33,13 @@ const initEntriesForTesting: WeightEntryType[] = [
     comment: 'week 2'
   },
   {
-    weight: 20.3,
+    weight: 87.3,
     date: new Date(new Date().setDate(new Date().getDate() - 360)),
+    comment: 'week 1'
+  },
+  {
+    weight: 87.3,
+    date: new Date(new Date().setDate(new Date().getDate() - 720)),
     comment: 'week 1'
   }
 ];
