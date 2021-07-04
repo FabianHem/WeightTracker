@@ -31,14 +31,15 @@
         switchDialog2Active();
     };
 
-    function onSubmitForm () {
+    function onSubmitForm() {
         // TODO make form check vals etc
-        switchDialog1Active()
-        addWeightEntry()
+        switchDialog1Active();
+        addWeightEntry();
     }
+
     function addWeightEntry() {
-      storeWeights.update(oldEntries => [...oldEntries, {
-            enteredWeight,
+        storeWeights.update(oldEntries => [...oldEntries, {
+            weight: parseFloat(enteredWeight),
             date,
             comment: 'no comment TODO',
         }]);
@@ -64,7 +65,7 @@
 
 <Dialog class="pa-4" bind:active={dialog1Active} persistent>
     <h4 style="padding-bottom: 8px">Add new Entry</h4>
-    <TextField value={enteredWeight} rules={weightEntryRules}>Weight</TextField>
+    <TextField bind:value={enteredWeight} rules={weightEntryRules}>Weight</TextField>
     <h4>{formatDate(date)}</h4>
     <Button on:click={switchDialog2Active}>Change Date</Button>
     <br/>
