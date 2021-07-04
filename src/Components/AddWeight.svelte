@@ -42,7 +42,8 @@
             weight: parseFloat(enteredWeight),
             date,
             comment: 'no comment TODO',
-        }]);
+        }].sort((a, b) => b.date - a.date));
+
     };
 
     onMount(async () => {
@@ -70,6 +71,7 @@
     <Button on:click={switchDialog2Active}>Change Date</Button>
     <br/>
     <Button on:click={onSubmitForm}>Okay</Button>
+    <Button on:click={switchDialog1Active}>Cancel</Button>
 </Dialog>
 
 <Dialog class="pa-4 dialog2" bind:active={dialog2Active} persistent>

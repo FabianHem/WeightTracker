@@ -1,3 +1,6 @@
+<svelte:head>
+    <link rel="stylesheet" href="https://unpkg.com/@carbon/charts/styles.min.css" />
+</svelte:head>
 <script>
     import {MaterialAppMin} from 'svelte-materialify';
     import Navigation from './Components/Navigation.svelte';

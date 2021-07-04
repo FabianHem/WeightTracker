@@ -8,23 +8,8 @@ export type WeightEntryType = {
 
 const initEntriesForTesting: WeightEntryType[] = [
   {
-    weight: 20.3,
-    date: new Date(new Date().setDate(new Date().getDate() - 360)),
-    comment: 'week 1'
-  },
-  {
-      weight: 85.3,
-    date: new Date(new Date().setDate(new Date().getDate() - 30)),
-    comment: 'week 2'
-  },
-  {
-    weight: 85.9,
-    date: new Date(new Date().setDate(new Date().getDate() - 10)),
-    comment: 'week 3'
-  },
-  {
-    weight: 1500,
-    date: new Date(new Date().setDate(new Date().getDate() - 4)),
+    weight: 88.3,
+    date: new Date(new Date().setDate(new Date().getDate() - 1)),
     comment: 'week 4'
   },
   {
@@ -33,9 +18,24 @@ const initEntriesForTesting: WeightEntryType[] = [
     comment: 'week 4'
   },
   {
-    weight: 88.3,
-    date: new Date(new Date().setDate(new Date().getDate() - 1)),
+    weight: 1500,
+    date: new Date(new Date().setDate(new Date().getDate() - 4)),
     comment: 'week 4'
+  },
+  {
+    weight: 85.9,
+    date: new Date(new Date().setDate(new Date().getDate() - 10)),
+    comment: 'week 3'
+  },
+  {
+    weight: 85.3,
+    date: new Date(new Date().setDate(new Date().getDate() - 30)),
+    comment: 'week 2'
+  },
+  {
+    weight: 20.3,
+    date: new Date(new Date().setDate(new Date().getDate() - 360)),
+    comment: 'week 1'
   }
 ];
 
