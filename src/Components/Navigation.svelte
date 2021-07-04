@@ -2,7 +2,7 @@
     import {AppBar, Tabs, Tab, Window, WindowItem} from 'svelte-materialify';
 
     import Start from './Tabs/Start.svelte';
-    import List from './Tabs/List.svelte';
+    import History from './Tabs/History.svelte';
     import Weeks from './Tabs/Weeks.svelte';
 
     import AddWeight from './AddWeight.svelte';
@@ -30,19 +30,19 @@
         <Tabs class="green-text" bind:value={tabIndex} fixedTabs>
             <div slot="tabs">
                 <Tab>Start</Tab>
-                <Tab>List</Tab>
+                <Tab>History</Tab>
                 <Tab>Weeks</Tab>
             </div>
         </Tabs>
     </div>
 </AppBar>
 
-<Window {tabIndex}>
+<Window value={tabIndex}>
     <WindowItem>
         <Start/>
     </WindowItem>
     <WindowItem>
-        <List/>
+        <History/>
     </WindowItem>
     <WindowItem>
         <Weeks/>

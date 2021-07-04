@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="edf1dbde-406c-4c25-863e-3bfb20ddebfe" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Components/WeightEntry.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/util/formatDate.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/AddWeight.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AddWeight.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Components/Navigation.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Navigation.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Tabs/List.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Tabs/History.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Tabs/Start.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Tabs/Start.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Store/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Store/store.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -77,7 +82,7 @@
       <option name="presentableId" value="Default" />
       <updated>1625323917497</updated>
       <workItem from="1625323920187" duration="7148000" />
-      <workItem from="1625377654607" duration="6134000" />
+      <workItem from="1625377654607" duration="7835000" />
     </task>
     <servers />
   </component>

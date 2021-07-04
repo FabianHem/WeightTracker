@@ -1,15 +1,17 @@
 <script lang="ts">
     import {storeWeights} from '../../Store/store';
+    import WeightEntry from '../WeightEntry.svelte';
 
     let weights: WeightEntryType[];
     storeWeights.subscribe(value => {
         weights = value;
     });
-    let latestWeightEntry = weights[weights.length - 1];
 </script>
 
-<h3>{latestWeightEntry.weight} Kg</h3>
-<h5>on {latestWeightEntry.date.toLocaleDateString('en-GB').replaceAll('/','.')}</h5>
+<h3>History</h3>
+{#each weights as weightEntryProp}
+    <WeightEntry weightEntry={weightEntryProp}/>
+{/each}
 
 <style>
 

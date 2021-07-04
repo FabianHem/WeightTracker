@@ -4,6 +4,7 @@
     import {storeWeights} from '../Store/store';
     import {onMount} from 'svelte';
     import {Datepicker} from 'svelte-mui';
+    import formatDate from '../util/formatDate';
 
     let weights;
     storeWeights.subscribe(value => {
@@ -36,16 +37,11 @@
         addWeightEntry()
     }
     function addWeightEntry() {
-        console.log(enteredWeight)
-                console.log(date)
-                console.log('no comment')
-
       storeWeights.update(oldEntries => [...oldEntries, {
             enteredWeight,
             date,
             comment: 'no comment TODO',
         }]);
-        console.log(weights);
     };
 
     onMount(async () => {
@@ -69,7 +65,7 @@
 <Dialog class="pa-4" bind:active={dialog1Active} persistent>
     <h4 style="padding-bottom: 8px">Add new Entry</h4>
     <TextField value={enteredWeight} rules={weightEntryRules}>Weight</TextField>
-    <h4>{date.toLocaleDateString('en-GB').replaceAll('/','.')}</h4>
+    <h4>{formatDate(date)}</h4>
     <Button on:click={switchDialog2Active}>Change Date</Button>
     <br/>
     <Button on:click={onSubmitForm}>Okay</Button>
