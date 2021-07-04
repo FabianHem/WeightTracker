@@ -1,10 +1,10 @@
 <script lang="ts">
-        import {Icon, Button, Dialog, TextField} from 'svelte-materialify';
+    import {Icon, Button, Dialog, TextField, Textarea} from 'svelte-materialify';
     import {mdiPlusThick} from '@mdi/js';
     import {storeWeights} from '../Store/store';
     import {onMount} from 'svelte';
     import {Datepicker} from 'svelte-mui';
-    import formatDate from '../util/formatDate';
+    import formatDate, {datesAreOnSameDay} from '../util/DateUtil';
 
     let weights;
     storeWeights.subscribe(value => {
@@ -14,6 +14,7 @@
     // Form
     let enteredWeight: number | null;
     let date = new Date();
+    let comment = '';
 
     function initializeForm() {
         enteredWeight = null;
@@ -31,6 +32,8 @@
         switchDialog2Active();
     };
 
+    // TODO add unsubscribe stuff because memoryleak or something?
+
     function onSubmitForm() {
         // TODO make form check vals etc
         switchDialog1Active();
@@ -38,24 +41,24 @@
     }
 
     function addWeightEntry() {
-        storeWeights.update(oldEntries => [...oldEntries, {
-            weight: parseFloat(enteredWeight),
-            date,
-            comment: 'no comment TODO',
-        }].sort((a, b) => b.date - a.date));
-
+        // TODO This overwrites old entries for days if they already exist, maybe warn users about that
+        storeWeights.update(oldEntries =>
+                [...oldEntries.filter(entry => !datesAreOnSameDay(entry.date, date)), {
+                    weight: parseFloat(enteredWeight),
+                    date,
+                    comment,
+                }].sort((a, b) => b.date - a.date));
     };
 
     onMount(async () => {
         initializeForm();
     });
 
+    // TODO add
     const weightEntryRules = [
         (v) => !!v || 'Required',
         // (v) => /^\d{1,3}(\.\d*){0,1}$/.test(v), 'not valid'
     ];
-    // TODO add weightentry rule
-    // TODO add comment function
 
 </script>
 
@@ -70,11 +73,13 @@
     <h4>{formatDate(date)}</h4>
     <Button on:click={switchDialog2Active}>Change Date</Button>
     <br/>
+    <h4>Comment</h4>
+    <Textarea counter="150" bind:value={comment}>150 characters</Textarea>
     <Button on:click={onSubmitForm}>Okay</Button>
     <Button on:click={switchDialog1Active}>Cancel</Button>
 </Dialog>
 
-<Dialog class="pa-4 dialog2" bind:active={dialog2Active} persistent>
+<Dialog class="pa-4" bind:active={dialog2Active} persistent>
     <Datepicker
             bind:value={date}
             isAllowed={(date) => {

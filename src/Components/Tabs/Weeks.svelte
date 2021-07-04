@@ -35,7 +35,7 @@
     <h4>Weekly averages</h4>
     {#each weekWeights as week}
         <ListItem>
-            {week.week} - {week.weight.toFixed(1)}
+            {week.week} - {week.weight.toFixed(1)} Kg
         </ListItem>
     {/each}
 </div>

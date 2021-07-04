@@ -1,19 +1,33 @@
 <script lang="ts">
-    import formatDate from '../util/formatDate';
-    import {ListItem, Icon} from 'svelte-materialify';
+    import formatDate from '../util/DateUtil';
+    import {ListItem, Icon, Button, ListGroup} from 'svelte-materialify';
     import {mdiPencilOutline, mdiDelete} from '@mdi/js';
 
     export let weightEntry: WeightEntryType;
+    export let onEdit;
+    export let onDelete;
+
+    let commentOpen = false;
+    const switchCommentOpen = () => commentOpen = !commentOpen;
+
 </script>
 
-<ListItem>
-    {formatDate(weightEntry.date)} - {weightEntry.weight} Kg
+<ListGroup bind:active={commentOpen}>
+    <span slot="activator">{formatDate(weightEntry.date)} - {weightEntry.weight} Kg</span>
     <span slot="append">
-        <Icon path={mdiPencilOutline} style="margin-right: 16px"/>
-        <Icon path={mdiDelete}/>
+        <!--
+        TODO add/activate edit function, should probably share logic with AddWeight stuff
+        <Button icon on:click={(e) => onEdit(e, weightEntry.date)}>
+            <Icon path={mdiPencilOutline}/>
+        </Button>
+        -->
+        <span style="margin-right: 16px"/>
+        <Button icon class="red-text" on:click={(e) => onDelete(e, weightEntry.date)}>
+            <Icon path={mdiDelete}/>
+        </Button>
       </span>
-</ListItem>
-
-<style>
-
-</style>
+    <ListItem on:click={switchCommentOpen}>
+        <h5>Comment</h5>
+        <span>{weightEntry.comment}</span>
+    </ListItem>
+</ListGroup>
