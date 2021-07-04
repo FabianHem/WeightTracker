@@ -2,8 +2,31 @@ import { derived, writable, Writable } from "svelte/store";
 
 export type WeightEntry = {
   weight: number,
-  date: string,
+  date: Date,
   comment: string,
 }
 
-export const storeWeights: Writable<WeightEntry[]> = writable([])
+const initEntriesForTesting: WeightEntry[] = [
+  {
+    weight: 85.3,
+    date: new Date(new Date().setDate(new Date().getDate() - 10)),
+    comment : '2 weeks ago'
+  },
+  {
+    weight: 86.6,
+    date: new Date(new Date().setDate(new Date().getDate() - 4)),
+    comment : '4 days ago'
+  },
+  {
+    weight: 90,
+    date: new Date(new Date().setDate(new Date().getDate() - 2)),
+    comment : '2 days ago'
+  },
+  {
+    weight: 88.3,
+    date: new Date(new Date().setDate(new Date().getDate() - 1)),
+    comment : '1 day ago'
+  },
+]
+
+export const storeWeights: Writable<WeightEntry[]> = writable(initEntriesForTesting)

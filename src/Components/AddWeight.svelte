@@ -13,7 +13,6 @@
     // Form
     let enteredWeight: number | null;
     let date = new Date();
-    date.setDate(date.getDate() + 2);
 
     function initializeForm() {
         enteredWeight = null;
@@ -25,16 +24,40 @@
 
     const switchDialog1Active = () => dialog1Active = !dialog1Active;
     const switchDialog2Active = () => dialog2Active = !dialog2Active;
+    const onSelectDate = (e) => {
+        date = new Date(Date.parse(e.detail));
 
+        switchDialog2Active();
+    };
+
+    function onSubmitForm () {
+        // TODO make form check vals etc
+        switchDialog1Active()
+        addWeightEntry()
+    }
     function addWeightEntry() {
-        // TODO add date-logic
+        console.log(enteredWeight)
+                console.log(date)
+                console.log('no comment')
 
-        storeWeights.update(oldEntries => oldEntries.push({}));
+      storeWeights.update(oldEntries => [...oldEntries, {
+            enteredWeight,
+            date,
+            comment: 'no comment TODO',
+        }]);
+        console.log(weights);
     };
 
     onMount(async () => {
         initializeForm();
     });
+
+    const weightEntryRules = [
+        (v) => !!v || 'Required',
+        // (v) => /^\d{1,3}(\.\d*){0,1}$/.test(v), 'not valid'
+    ];
+    // TODO add weightentry rule
+    // TODO add comment function
 
 </script>
 
@@ -43,19 +66,21 @@
     <Icon path={mdiPlusThick}/>
 </Button>
 
-<Dialog class="pa-4" bind:active={dialog1Active}>
+<Dialog class="pa-4" bind:active={dialog1Active} persistent>
     <h4 style="padding-bottom: 8px">Add new Entry</h4>
-    <TextField value={enteredWeight} outlined>Weight</TextField>
-    <Button on:click={switchDialog2Active}>datepick</Button>
-    <Button on:click={switchDialog1Active}>Go</Button>
+    <TextField value={enteredWeight} rules={weightEntryRules}>Weight</TextField>
+    <h4>{date.toLocaleDateString('en-GB').replaceAll('/','.')}</h4>
+    <Button on:click={switchDialog2Active}>Change Date</Button>
+    <br/>
+    <Button on:click={onSubmitForm}>Okay</Button>
 </Dialog>
 
 <Dialog class="pa-4 dialog2" bind:active={dialog2Active} persistent>
     <Datepicker
             bind:value={date}
             isAllowed={(date) => {
-                return date.getDay() > 0 && date.getDay() < 6;
+            return date.getDay() > 0 && date.getDay() < 6;
             }}
-            on:select={switchDialog2Active}
+            on:select={onSelectDate}
     />
 </Dialog>

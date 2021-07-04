@@ -37,7 +37,7 @@
     </div>
 </AppBar>
 
-<Window {value}>
+<Window {tabIndex}>
     <WindowItem>
         <Start/>
     </WindowItem>
