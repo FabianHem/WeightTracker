@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="edf1dbde-406c-4c25-863e-3bfb20ddebfe" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AddWeight.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AddWeight.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Tabs/History.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Tabs/History.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Tabs/Weeks.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Tabs/Weeks.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Store/store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/Store/store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -79,7 +74,7 @@
       <option name="presentableId" value="Default" />
       <updated>1625323917497</updated>
       <workItem from="1625323920187" duration="7148000" />
-      <workItem from="1625377654607" duration="11044000" />
+      <workItem from="1625377654607" duration="11247000" />
     </task>
     <servers />
   </component>
