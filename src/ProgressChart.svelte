@@ -2,6 +2,7 @@
     import {LineChart} from '@carbon/charts-svelte';
     import {storeWeights} from './Store/store';
     import {ButtonGroup, ButtonGroupItem} from 'svelte-materialify';
+    import {onDestroy} from 'svelte';
 
     const getDateForFilter = () => {
         switch (displayIndex) {
@@ -34,7 +35,7 @@
     };
 
     let weights: WeightEntryType[];
-    storeWeights.subscribe(value => {
+    const unsubscribe = storeWeights.subscribe(value => {
         weights = value;
     });
 
@@ -44,6 +45,7 @@
     let max = 0;
 
     getChartData();
+    onDestroy(unsubscribe);
 </script>
 
 <ButtonGroup mandatory activeClass="red white-text" bind:value={displayIndex} on:change={getChartData}>

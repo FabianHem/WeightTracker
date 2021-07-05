@@ -3,9 +3,10 @@
     import WeightEntry from '../WeightEntry.svelte';
     import {Dialog, Button} from 'svelte-materialify';
     import formatDate from '../../util/DateUtil';
+    import {onDestroy} from 'svelte';
 
     let weights: WeightEntryType[];
-    storeWeights.subscribe(value => {
+    const unsubscribe = storeWeights.subscribe(value => {
         weights = value;
     });
 
@@ -34,6 +35,8 @@
     const switchDeleteOpen = () => deleteDialogOpen = !deleteDialogOpen;
 
     let selectedDate = '';
+
+    onDestroy(unsubscribe);
 </script>
 
 <div class="d-flex flex-column justify-center align-stretch">

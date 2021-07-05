@@ -1,9 +1,10 @@
 <script lang="ts">
     import {storeWeights} from '../../Store/store';
     import {ListItem} from 'svelte-materialify';
+    import {onDestroy} from 'svelte';
 
     let weights: WeightEntryType[];
-    storeWeights.subscribe(value => {
+    const unsubscribe = storeWeights.subscribe(value => {
         weights = value;
     });
 
@@ -29,6 +30,8 @@
             weight: weightAverage
         };
     });
+
+    onDestroy(unsubscribe)
 </script>
 
 <div class="d-flex flex-column justify-center align-center">

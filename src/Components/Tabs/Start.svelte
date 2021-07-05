@@ -1,25 +1,27 @@
 <script lang="ts">
+    import formatDate from './../../util/DateUtil';
     import {storeWeights} from '../../Store/store';
     import ProgressChart from '../../ProgressChart.svelte';
 
     let weights: WeightEntryType[];
-    storeWeights.subscribe(value => {
+    const unsubscribe = storeWeights.subscribe(value => {
         weights = value;
     });
-    let latestWeightEntry = weights[weights.length - 1] ?? null;
+    $: latestWeightEntry = weights[0];
 
+    onDestroy(unsubscribe);
 </script>
 
 <div class="flex-column align-center justify-center d-flex">
-    {#if latestWeightEntry !== null}
-        <span>most recent weight:</span>
-        <h3>{latestWeightEntry.weight} Kg</h3>
-        <h5>on {latestWeightEntry.date.toLocaleDateString('en-GB').replaceAll('/','.')}</h5>
-        <br/>
-        <ProgressChart amountOfMonths={3}/>
-    {:else}
+    {#if !latestWeightEntry}
         <h3>No Data yet</h3>
         <span>Add an entry with the button on the bottom</span>
+    {:else}
+        <span>most recent weight:</span>
+        <h3>{latestWeightEntry.weight} Kg</h3>
+        <h5>on {formatDate(latestWeightEntry.date)}</h5>
+        <br/>
+        <ProgressChart amountOfMonths={3}/>
     {/if}
 </div>
 

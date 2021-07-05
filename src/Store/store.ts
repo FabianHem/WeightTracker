@@ -1,6 +1,6 @@
 import {derived, writable, Writable} from 'svelte/store';
-import {getDataFromLocalStorage} from '../util/StorageUtil';
 
+/*
 const initEntriesForTesting: WeightEntryType[] = [
   {
     weight: 88.3,
@@ -38,6 +38,7 @@ const initEntriesForTesting: WeightEntryType[] = [
     comment: 'week 1'
   }
 ];
+ */
 
 export type WeightEntryType = {
   weight: number,
@@ -45,15 +46,17 @@ export type WeightEntryType = {
   comment: string,
 };
 
-export const storeWeights: Writable<WeightEntryType[]> = writable(initEntriesForTesting);
+// Turns date-strings into date-objects
+const localStorageToStored = () => {
+  const content = localStorage.content ? JSON.parse(localStorage.content) : [];
+  return content.map((entry) => ({
+    ...entry,
+    date: new Date(entry.date)
+  }));
+};
 
-/*
-TODO hook up to localStorage or better yet use a backend right away
-
-// Hooks this up to localStorage https://dev.to/danawoodman/svelte-quick-tip-connect-a-store-to-local-storage-4idi
-const stored = localStorage.content ? JSON.parse(localStorage.content) : [];
+const stored = localStorageToStored();
 
 export const storeWeights: Writable<WeightEntryType[]> = writable(stored || []);
 
 storeWeights.subscribe((value) => localStorage.content = JSON.stringify(value));
-*/
