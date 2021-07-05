@@ -2,6 +2,7 @@
     import formatDate from './../../util/DateUtil';
     import {storeWeights} from '../../Store/store';
     import ProgressChart from '../../ProgressChart.svelte';
+    import {onDestroy} from 'svelte';
 
     let weights: WeightEntryType[];
     const unsubscribe = storeWeights.subscribe(value => {
