@@ -1,4 +1,4 @@
-# Weighttracker hacked together in 2 days in Svelte without knowing Svelte 
+# Weighttracker sloppily hacked together in 2 days in Svelte without knowing Svelte 
 
 ## Get started
 
