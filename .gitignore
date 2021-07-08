@@ -2,5 +2,6 @@
 /public/build/
 /.vscode/
 /.idea/
+auth_config.ts
 
 .DS_Store
