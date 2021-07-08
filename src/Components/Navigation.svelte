@@ -1,11 +1,12 @@
 <script lang="ts">
     import {AppBar, Tabs, Tab, Window, WindowItem} from 'svelte-materialify';
+    import {user} from '../Store/authStore';
 
     import Start from './Tabs/Start.svelte';
     import History from './Tabs/History.svelte';
     import Weeks from './Tabs/Weeks.svelte';
-
     import AddWeight from './AddWeight.svelte';
+    import Authentication from './Authentication.svelte';
 
     let tabIndex = 0;
 
@@ -13,40 +14,52 @@
     //  maybe add https://github.com/SharifClick/svelte-swipe
     /*
 
-    import {Swipe, SwipeItem} from 'svelte-swipe';
-    const swipeConfig = {
-        autoplay: false,
-        delay: 0,
-        showIndicators: true,
-        transitionDuration: 0,
-        defaultIndex: 0,
-    };
-     */
+      import {Swipe, SwipeItem} from 'svelte-swipe';
+      const swipeConfig = {
+          autoplay: false,
+          delay: 0,
+          showIndicators: true,
+          transitionDuration: 0,
+          defaultIndex: 0,
+      };
+       */
 </script>
 
-<AppBar>
-    <span slot="title">Very good Weighttracker</span>
+<AppBar style="width: 100%">
+    <div slot="title" class="d-flex" style="width: 100%;">
+        <span>Tracker</span>
+    </div>
+    <div style="flex-grow:1"/>
+    <Authentication/>
     <div slot="extension">
-        <Tabs class="green-text" bind:value={tabIndex} fixedTabs>
-            <div slot="tabs">
-                <Tab>Start</Tab>
-                <Tab>History</Tab>
-                <Tab>Weeks</Tab>
-            </div>
-        </Tabs>
+        {#if $user}
+            <Tabs class="green-text" bind:value={tabIndex} fixedTabs>
+                <div slot="tabs">
+                    <Tab>Start</Tab>
+                    <Tab>History</Tab>
+                    <Tab>Weeks</Tab>
+                </div>
+            </Tabs>
+        {/if}
     </div>
 </AppBar>
 
-<Window value={tabIndex}>
-    <WindowItem>
-        <Start/>
-    </WindowItem>
-    <WindowItem>
-        <History/>
-    </WindowItem>
-    <WindowItem>
-        <Weeks/>
-    </WindowItem>
-</Window>
+{#if $user}
+    <Window value={tabIndex}>
+        <WindowItem>
+            <Start/>
+        </WindowItem>
+        <WindowItem>
+            <History/>
+        </WindowItem>
+        <WindowItem>
+            <Weeks/>
+        </WindowItem>
+    </Window>
 
-<AddWeight />
+    <AddWeight/>
+{:else}
+<div style="width: 100%; height: 200px; display: flex; justify-content: center; align-items: center">
+    Login to use app
+</div>
+{/if}

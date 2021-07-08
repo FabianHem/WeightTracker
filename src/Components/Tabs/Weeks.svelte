@@ -1,16 +1,10 @@
 <script lang="ts">
-    import {storeWeights} from '../../Store/store';
+    import {weights} from '../../Store/weightStore';
     import {ListItem} from 'svelte-materialify';
-    import {onDestroy} from 'svelte';
-
-    let weights: WeightEntryType[];
-    const unsubscribe = storeWeights.subscribe(value => {
-        weights = value;
-    });
 
     let calendarWeekMap = new Map();
     let calendarKeysInOrder = [];
-    weights.forEach(weight => {
+    $weights.forEach(weight => {
         const key = `${weight.date.getFullYear()} - W${weight.date.getWeek()}: `;
         if (calendarWeekMap[key] === undefined) {
             calendarWeekMap[key] = [weight];
@@ -30,8 +24,6 @@
             weight: weightAverage
         };
     });
-
-    onDestroy(unsubscribe)
 </script>
 
 <div class="d-flex flex-column justify-center align-center">

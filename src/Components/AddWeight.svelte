@@ -1,15 +1,10 @@
 <script lang="ts">
     import {Icon, Button, Dialog, TextField, Textarea} from 'svelte-materialify';
     import {mdiPlusThick} from '@mdi/js';
-    import {storeWeights} from '../Store/store';
-    import {onDestroy, onMount} from 'svelte';
+    import {weights} from '../Store/weightStore';
+    import {onMount} from 'svelte';
     import {Datepicker} from 'svelte-mui';
     import formatDate, {datesAreOnSameDay} from '../util/DateUtil';
-
-    let weights;
-    const unsubscribe = storeWeights.subscribe(value => {
-        weights = value;
-    });
 
     // Form
     let enteredWeight: number | null;
@@ -42,7 +37,7 @@
 
     function addWeightEntry() {
         // TODO This overwrites old entries for days if they already exist, maybe warn users about that
-        storeWeights.update(oldEntries =>
+        weights.update(oldEntries =>
                 [...oldEntries.filter(entry => !datesAreOnSameDay(entry.date, date)), {
                     weight: parseFloat(enteredWeight),
                     date,
@@ -59,8 +54,6 @@
         (v) => !!v || 'Required',
         // (v) => /^\d{1,3}(\.\d*){0,1}$/.test(v), 'not valid'
     ];
-
-    onDestroy(unsubscribe)
 </script>
 
 <Button fab size="large" class="white red-text" style="position: absolute; bottom: 16px; right: 16px;"
