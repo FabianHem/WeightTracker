@@ -28,7 +28,6 @@
     "typescript": "^4.0.0"
   },
   "dependencies": {
-    "@auth0/auth0-spa-js": "^1.16.1",
     "@carbon/charts": "^0.41.79",
     "@carbon/charts-svelte": "^0.41.79",
     "@mdi/js": "^5.9.55",

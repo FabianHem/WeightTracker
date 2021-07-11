@@ -1,8 +1,14 @@
 <script lang="ts">
-    import {weights} from '../../Store/weightStore';
+    import {storeWeights} from '../../Store/store';
     import WeightEntry from '../WeightEntry.svelte';
     import {Dialog, Button} from 'svelte-materialify';
     import formatDate from '../../util/DateUtil';
+    import {onDestroy} from 'svelte';
+
+    let weights: WeightEntryType[];
+    const unsubscribe = storeWeights.subscribe(value => {
+        weights = value;
+    });
 
     const onEdit = (e, date) => {
         e.stopPropagation();
@@ -17,7 +23,7 @@
     };
 
     const deleteCurrentlySelectedDate = () => {
-        weights.update(oldEntries => [...oldEntries].filter(entry => entry.date !== selectedDate));
+        storeWeights.update(oldEntries => [...oldEntries].filter(entry => entry.date !== selectedDate));
         selectedDate = '';
         switchDeleteOpen();
     };
@@ -29,11 +35,13 @@
     const switchDeleteOpen = () => deleteDialogOpen = !deleteDialogOpen;
 
     let selectedDate = '';
+
+    onDestroy(unsubscribe);
 </script>
 
 <div class="d-flex flex-column justify-center align-stretch">
     <h3>History</h3>
-    {#each $weights as weightEntryProp}
+    {#each weights as weightEntryProp}
         <WeightEntry weightEntry={weightEntryProp} onEdit={onEdit} onDelete={onDelete}/>
     {/each}
 </div>

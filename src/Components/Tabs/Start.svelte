@@ -1,13 +1,19 @@
 <script lang="ts">
     import formatDate from './../../util/DateUtil';
-    import {weights} from '../../Store/weightStore';
+    import {storeWeights} from '../../Store/store';
     import ProgressChart from '../../ProgressChart.svelte';
+    import {onDestroy} from 'svelte';
 
-    $: latestWeightEntry = $weights[0];
+    let weights: WeightEntryType[];
+    const unsubscribe = storeWeights.subscribe(value => {
+        weights = value;
+    });
+    $: latestWeightEntry = weights[0];
+
+    onDestroy(unsubscribe);
 </script>
 
 <div class="flex-column align-center justify-center d-flex">
-
     {#if !latestWeightEntry}
         <h3>No Data yet</h3>
         <span>Add an entry with the button on the bottom</span>

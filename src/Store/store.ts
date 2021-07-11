@@ -57,6 +57,6 @@ const localStorageToStored = () => {
 
 const stored = localStorageToStored();
 
-export const weights: Writable<WeightEntryType[]> = writable(stored || []);
+export const storeWeights: Writable<WeightEntryType[]> = writable(stored || []);
 
-weights.subscribe((value) => localStorage.content = JSON.stringify(value));
+storeWeights.subscribe((value) => localStorage.content = JSON.stringify(value));
