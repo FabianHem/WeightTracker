@@ -59,8 +59,8 @@
 	        axes: {
 	        	left: {
 	        	  "domain": [
-	        	    min - 3,
-	        	    max + 3
+	        	    min - 15,
+	        	    max + 15
 	        	    ]
 	        	},
 	        	bottom: {
