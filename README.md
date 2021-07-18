@@ -1,6 +1,20 @@
-# Weighttracker hacked together in Svelte and Firebase without knowing either Svelte nor Firebase 
+# Weighttracker hacked together in Svelte and Firebase whilst knowing neither Svelte nor Firebase 
 
-<!--
+## TODO
+- Fix/Update setup guide
+- Add way to develop without using real firebase
+- Fix reactivity instead of fetching DB for each page, add general store that reacts to a DB update
+- Probably remove rxJs stuff or better yet learn it
+- Fix "add weight" button to scroll with the page
+- Fix display of chart
+- Add error messages to "add weight"-fct.
+- Add "edit weight"
+- Add swipe functionality to pages`` on mobile
+- Add desktop view
+- Add deployment pipeline
+- Dockerize application
+- Automate Deployments.
+
 ## Get started
 
 Start locally
@@ -24,4 +38,3 @@ You can run the newly built app with `npm run start`. This uses [sirv](https://g
 
 ## Todo
 - Todo's are just spread into the code right now
--->
