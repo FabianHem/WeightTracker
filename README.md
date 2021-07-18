@@ -1,5 +1,6 @@
-# Weighttracker sloppily hacked together in 2 days in Svelte without knowing Svelte 
+# Weighttracker hacked together in Svelte and Firebase without knowing either Svelte nor Firebase 
 
+<!--
 ## Get started
 
 Start locally
@@ -23,3 +24,4 @@ You can run the newly built app with `npm run start`. This uses [sirv](https://g
 
 ## Todo
 - Todo's are just spread into the code right now
+-->
