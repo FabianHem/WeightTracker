@@ -1,7 +1,7 @@
 <script lang="ts">
     import {AppBar, Tabs, Tab, Window, WindowItem} from 'svelte-materialify';
     import {authState} from 'rxfire/auth';
-    import { auth } from './../util/firebase';
+    import {auth} from './../util/firebase';
     import Start from './Tabs/Start.svelte';
     import History from './Tabs/History.svelte';
     import WeeksContainer from './Tabs/WeeksContainer.svelte';
@@ -24,9 +24,10 @@
       };
        */
 
-    let uid;
-    const unsubscribe = authState(auth).subscribe(u => {
-        uid = u.uid;
+    let uid = null;
+    authState(auth).subscribe(u => {
+        if (u)
+            uid = u.uid;
     });
 </script>
 
@@ -64,7 +65,7 @@
 
     <AddWeight uid={uid}/>
 {:else}
-<div style="width: 100%; height: 200px; display: flex; justify-content: center; align-items: center">
-    Login to use app
-</div>
+    <div style="width: 100%; height: 200px; display: flex; justify-content: center; align-items: center">
+        Login to use app
+    </div>
 {/if}
