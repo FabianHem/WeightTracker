@@ -1,11 +1,13 @@
-<script lang="ts">
-    import {weights} from '../../Store/weightStore';
+<script>
     import {ListItem} from 'svelte-materialify';
+    import {getDateFromSeconds} from '../../util/DateUtil';
+
+    export let weights;
 
     let calendarWeekMap = new Map();
     let calendarKeysInOrder = [];
-    $weights.forEach(weight => {
-        const key = `${weight.date.getFullYear()} - W${weight.date.getWeek()}: `;
+    weights.map(weight => {
+        const key = `${getDateFromSeconds(weight.date.seconds).getFullYear()} - W${getDateFromSeconds(weight.date.seconds).getWeek()}: `;
         if (calendarWeekMap[key] === undefined) {
             calendarWeekMap[key] = [weight];
             calendarKeysInOrder.push(key);
@@ -26,17 +28,8 @@
     });
 </script>
 
-<div class="d-flex flex-column justify-center align-center">
-    <h4>Weekly averages</h4>
-    {#each weekWeights as week}
-        <ListItem>
-            {week.week} - {week.weight.toFixed(1)} Kg
-        </ListItem>
-    {/each}
-</div>
-
-<style>
-    h4 {
-        padding: 8px;
-    }
-</style>
+{#each weekWeights as week}
+    <ListItem>
+        {week.week} - {week.weight.toFixed(1)} Kg
+    </ListItem>
+{/each}

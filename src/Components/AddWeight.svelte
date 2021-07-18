@@ -1,10 +1,9 @@
 <script lang="ts">
     import {Icon, Button, Dialog, TextField, Textarea} from 'svelte-materialify';
     import {mdiPlusThick} from '@mdi/js';
-    import {weights} from '../Store/weightStore';
     import {onMount} from 'svelte';
     import {Datepicker} from 'svelte-mui';
-    import formatDate, {datesAreOnSameDay} from '../util/DateUtil';
+    import formatDate from '../util/DateUtil';
     import { db } from './../util/firebase';
 
     export let uid;
@@ -39,23 +38,12 @@
     }
 
     function addWeightEntry() {
-        // TODO This overwrites old entries for days if they already exist, maybe warn users about that
-        weights.update(oldEntries =>
-                [...oldEntries.filter(entry => !datesAreOnSameDay(entry.date, date)), {
-                    weight: parseFloat(enteredWeight),
-                    date,
-                    comment,
-                    uid,
-                }].sort((a, b) => b.date - a.date));
-
-        /*
         db.collection('weights').add({
             weight: parseFloat(enteredWeight),
             date,
             comment,
             uid,
         })
-         */
     };
 
     onMount(async () => {
@@ -97,7 +85,7 @@
     <Datepicker
             bind:value={date}
             isAllowed={(date) => {
-            return date.getDay() > 0 && date.getDay() < 6;
+                return date.getDay() > 0 && date.getDay() < 6;
             }}
             on:select={onSelectDate}
     />

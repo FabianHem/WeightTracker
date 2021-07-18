@@ -1,24 +1,28 @@
 <script lang="ts">
-    import {weights} from '../../Store/weightStore';
     import WeightEntry from '../WeightEntry.svelte';
     import {Dialog, Button} from 'svelte-materialify';
     import formatDate from '../../util/DateUtil';
+    import {db} from './../../util/firebase';
+    import {collectionData} from 'rxfire/firestore';
+    import {startWith} from 'rxjs/operators';
 
-    const onEdit = (e, date) => {
+    export let uid;
+
+    const onEdit = (e, weightEntry) => {
         e.stopPropagation();
-        selectedDate = date;
+        selectedEntry = weightEntry;
         switchEditOpen();
     };
 
-    const onDelete = (e, date) => {
+    const onDelete = (e, weightEntry) => {
         e.stopPropagation();
-        selectedDate = date;
+        selectedEntry = weightEntry;
         switchDeleteOpen();
     };
 
-    const deleteCurrentlySelectedDate = () => {
-        weights.update(oldEntries => [...oldEntries].filter(entry => entry.date !== selectedDate));
-        selectedDate = '';
+    const deleteCurrentlySelectedEntry = () => {
+        db.collection('weights').doc(selectedEntry.id).delete();
+        selectedEntry = null;
         switchDeleteOpen();
     };
 
@@ -28,7 +32,11 @@
     const switchEditOpen = () => editDialogOpen = !editDialogOpen;
     const switchDeleteOpen = () => deleteDialogOpen = !deleteDialogOpen;
 
-    let selectedDate = '';
+    let selectedEntry = null;
+
+    const query = db.collection('weights').where('uid', '==', uid).orderBy('date', 'desc');
+    const weights = collectionData(query, 'id').pipe(startWith([]));
+
 </script>
 
 <div class="d-flex flex-column justify-center align-stretch">
@@ -43,9 +51,9 @@
 </Dialog>
 
 <Dialog class="pa-4" bind:active={deleteDialogOpen}>
-    <p>Sure to delete the entry for {formatDate(selectedDate)}?</p>
+    <p>Sure to delete the entry for {formatDate(selectedEntry)}?</p>
     <Button on:click={switchDeleteOpen}>Cancel</Button>
-    <Button on:click={deleteCurrentlySelectedDate}>Delete</Button>
+    <Button on:click={deleteCurrentlySelectedEntry}>Delete</Button>
 </Dialog>
 
 <style>

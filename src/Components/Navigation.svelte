@@ -4,7 +4,7 @@
     import { auth } from './../util/firebase';
     import Start from './Tabs/Start.svelte';
     import History from './Tabs/History.svelte';
-    import Weeks from './Tabs/Weeks.svelte';
+    import WeeksContainer from './Tabs/WeeksContainer.svelte';
     import AddWeight from './AddWeight.svelte';
     import Authentication from './Authentication.svelte';
 
@@ -23,7 +23,6 @@
           defaultIndex: 0,
       };
        */
-
 
     let uid;
     const unsubscribe = authState(auth).subscribe(u => {
@@ -53,13 +52,13 @@
 {#if uid}
     <Window value={tabIndex}>
         <WindowItem>
-            <Start/>
+            <Start uid={uid}/>
         </WindowItem>
         <WindowItem>
-            <History/>
+            <History uid={uid}/>
         </WindowItem>
         <WindowItem>
-            <Weeks/>
+            <WeeksContainer uid={uid}/>
         </WindowItem>
     </Window>
 

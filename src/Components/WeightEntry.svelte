@@ -3,7 +3,7 @@
     import {ListItem, Icon, Button, ListGroup} from 'svelte-materialify';
     import {mdiPencilOutline, mdiDelete} from '@mdi/js';
 
-    export let weightEntry: WeightEntryType;
+    export let weightEntry;
     export let onEdit;
     export let onDelete;
 
@@ -17,12 +17,12 @@
     <span slot="append">
         <!--
         TODO add/activate edit function, should probably share logic with AddWeight stuff
-        <Button icon on:click={(e) => onEdit(e, weightEntry.date)}>
+        <Button icon on:click={(e) => onEdit(e, weightEntry)}>
             <Icon path={mdiPencilOutline}/>
         </Button>
         -->
         <span style="margin-right: 16px"/>
-        <Button icon class="red-text" on:click={(e) => onDelete(e, weightEntry.date)}>
+        <Button icon class="red-text" on:click={(e) => onDelete(e, weightEntry)}>
             <Icon path={mdiDelete}/>
         </Button>
       </span>

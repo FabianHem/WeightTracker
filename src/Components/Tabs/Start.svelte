@@ -1,23 +1,28 @@
 <script lang="ts">
     import formatDate from './../../util/DateUtil';
-    import {weights} from '../../Store/weightStore';
+    import {collectionData} from 'rxfire/firestore';
     import ProgressChart from '../../ProgressChart.svelte';
-    import {Button} from 'svelte-materialify';
+    import {startWith} from 'rxjs/operators';
+    import {db} from './../../util/firebase';
 
-    $: latestWeightEntry = $weights[0];
+    export let uid;
 
+    const query = db.collection('weights').where('uid', '==', uid).orderBy('date', 'desc').limit(1);
+    const latestWeightEntry = collectionData(query, 'id').pipe(startWith([]));
 </script>
 
 <div class="flex-column align-center justify-center d-flex">
-    {#if !latestWeightEntry}
+    {#if latestWeightEntry?.length}
         <h3>No Data yet</h3>
         <span>Add an entry with the button on the bottom</span>
     {:else}
-        <span>most recent weight:</span>
-        <h3>{latestWeightEntry.weight} Kg</h3>
-        <h5>on {formatDate(latestWeightEntry.date)}</h5>
-        <br/>
-        <ProgressChart amountOfMonths={3}/>
+        {#each $latestWeightEntry as entry}
+            <span>most recent weight:</span>
+            <h3>{entry.weight} Kg</h3>
+            <h5>on {formatDate(entry.date)}</h5>
+            <br/>
+            <!--<ProgressChart amountOfMonths={3}/>-->
+        {/each}
     {/if}
 </div>
 
