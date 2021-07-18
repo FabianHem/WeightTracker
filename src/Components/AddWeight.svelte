@@ -3,8 +3,8 @@
     import {mdiPlusThick} from '@mdi/js';
     import {onMount} from 'svelte';
     import {Datepicker} from 'svelte-mui';
-    import formatDate from '../util/DateUtil';
-    import { db } from './../util/firebase';
+    import formatDate, {formatDateToEuropean} from '../util/DateUtil';
+    import {db} from './../util/firebase';
 
     export let uid;
 
@@ -43,7 +43,7 @@
             date,
             comment,
             uid,
-        })
+        });
     };
 
     onMount(async () => {
@@ -67,7 +67,7 @@
     <br/>
     <TextField bind:value={enteredWeight} rules={weightEntryRules}>Weight</TextField>
     <br/>
-    <h4>{formatDate(date)}</h4>
+    <h4>{formatDateToEuropean(date)}</h4>
     <Button on:click={switchDialog2Active}>Change Date</Button>
     <br/>
     <h4>Comment</h4>
@@ -85,7 +85,7 @@
     <Datepicker
             bind:value={date}
             isAllowed={(date) => {
-                return date.getDay() > 0 && date.getDay() < 6;
+            return date.getDay() > 0 && date.getDay() < 6;
             }}
             on:select={onSelectDate}
     />

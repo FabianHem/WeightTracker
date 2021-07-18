@@ -22,7 +22,7 @@
     <h4>Weekly averages</h4>
     {#if weights.length > 0}
         <Weeks weights={weights}/>
-    {/if}}
+    {/if}
 </div>
 
 <style>

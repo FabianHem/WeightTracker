@@ -1,7 +1,8 @@
 <script lang="ts">
     import {LineChart} from '@carbon/charts-svelte';
-    import {weights} from './Store/weightStore';
     import {ButtonGroup, ButtonGroupItem} from 'svelte-materialify';
+
+    export let weights;
 
     const getDateForFilter = () => {
         switch (displayIndex) {
@@ -15,7 +16,7 @@
     };
 
     const getChartData = () => {
-        datasetData = $weights
+        datasetData = weights
                 .filter(weight =>
                         weight.date > getDateForFilter()
                 )
@@ -38,7 +39,7 @@
     let min = 200;
     let max = 0;
 
-    getChartData();
+    $: getChartData();
 </script>
 
 <ButtonGroup mandatory activeClass="red white-text" bind:value={displayIndex} on:change={getChartData}>

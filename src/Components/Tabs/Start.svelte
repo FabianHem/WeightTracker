@@ -7,8 +7,21 @@
 
     export let uid;
 
-    const query = db.collection('weights').where('uid', '==', uid).orderBy('date', 'desc').limit(1);
-    const latestWeightEntry = collectionData(query, 'id').pipe(startWith([]));
+    const queryLatest = db.collection('weights').where('uid', '==', uid).orderBy('date', 'desc').limit(1);
+    const latestWeightEntry = collectionData(queryLatest, 'id').pipe(startWith([]));
+
+    // TODO fetch all weights only once, put it in a store and grab i from there instead of getting it from firebase everytime
+    $: weights = [];
+    db.collection('weights').where('uid', '==', uid).orderBy('date', 'desc').get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    weights = [...weights, data];
+                });
+            })
+            .catch((error) => {
+                console.log('Error getting docs: ', error);
+            });
 </script>
 
 <div class="flex-column align-center justify-center d-flex">
@@ -21,7 +34,7 @@
             <h3>{entry.weight} Kg</h3>
             <h5>on {formatDate(entry.date)}</h5>
             <br/>
-            <!--<ProgressChart amountOfMonths={3}/>-->
+            <ProgressChart weights={weights} amountOfMonths={3}/>
         {/each}
     {/if}
 </div>

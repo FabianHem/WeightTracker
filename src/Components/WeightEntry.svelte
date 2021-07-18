@@ -9,7 +9,6 @@
 
     let commentOpen = false;
     const switchCommentOpen = () => commentOpen = !commentOpen;
-
 </script>
 
 <ListGroup bind:active={commentOpen}>
