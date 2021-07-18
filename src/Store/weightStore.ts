@@ -5,37 +5,44 @@ const initEntriesForTesting: WeightEntryType[] = [
   {
     weight: 88.3,
     date: new Date(new Date().setDate(new Date().getDate() - 1)),
-    comment: 'week 4'
+    comment: 'week 4',
+    uid: 'asdasds'
   },
   {
     weight: 90,
     date: new Date(new Date().setDate(new Date().getDate() - 2)),
-    comment: 'week 4'
+    comment: 'week 4',
+    uid: 'asdasds'
   },
   {
     weight: 85,
     date: new Date(new Date().setDate(new Date().getDate() - 4)),
-    comment: 'week 4'
+    comment: 'week 4',
+    uid: 'asdasds'
   },
   {
     weight: 85.9,
     date: new Date(new Date().setDate(new Date().getDate() - 10)),
-    comment: 'week 3'
+    comment: 'week 3',
+    uid: 'asdasds'
   },
   {
     weight: 85.3,
     date: new Date(new Date().setDate(new Date().getDate() - 30)),
-    comment: 'week 2'
+    comment: 'week 2',
+    uid: 'asdasds'
   },
   {
     weight: 87.3,
     date: new Date(new Date().setDate(new Date().getDate() - 360)),
-    comment: 'week 1'
+    comment: 'week 1',
+    uid: 'asdasds'
   },
   {
     weight: 87.3,
     date: new Date(new Date().setDate(new Date().getDate() - 720)),
-    comment: 'week 1'
+    comment: 'week 1',
+    uid: 'asdasds'
   }
 ];
  */
@@ -44,6 +51,7 @@ export type WeightEntryType = {
   weight: number,
   date: Date,
   comment: string,
+  uid: string,
 };
 
 // Turns date-strings into date-objects

@@ -1,7 +1,7 @@
 <script lang="ts">
     import {AppBar, Tabs, Tab, Window, WindowItem} from 'svelte-materialify';
-    import {user} from '../Store/authStore';
-
+    import {authState} from 'rxfire/auth';
+    import { auth } from './../util/firebase';
     import Start from './Tabs/Start.svelte';
     import History from './Tabs/History.svelte';
     import Weeks from './Tabs/Weeks.svelte';
@@ -23,6 +23,12 @@
           defaultIndex: 0,
       };
        */
+
+
+    let uid;
+    const unsubscribe = authState(auth).subscribe(u => {
+        uid = u.uid;
+    });
 </script>
 
 <AppBar style="width: 100%">
@@ -32,7 +38,7 @@
     <div style="flex-grow:1"/>
     <Authentication/>
     <div slot="extension">
-        {#if $user}
+        {#if uid}
             <Tabs class="green-text" bind:value={tabIndex} fixedTabs>
                 <div slot="tabs">
                     <Tab>Start</Tab>
@@ -44,7 +50,7 @@
     </div>
 </AppBar>
 
-{#if $user}
+{#if uid}
     <Window value={tabIndex}>
         <WindowItem>
             <Start/>
@@ -57,7 +63,7 @@
         </WindowItem>
     </Window>
 
-    <AddWeight/>
+    <AddWeight uid={uid}/>
 {:else}
 <div style="width: 100%; height: 200px; display: flex; justify-content: center; align-items: center">
     Login to use app

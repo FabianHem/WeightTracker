@@ -5,6 +5,9 @@
     import {onMount} from 'svelte';
     import {Datepicker} from 'svelte-mui';
     import formatDate, {datesAreOnSameDay} from '../util/DateUtil';
+    import { db } from './../util/firebase';
+
+    export let uid;
 
     // Form
     let enteredWeight: number | null;
@@ -42,7 +45,17 @@
                     weight: parseFloat(enteredWeight),
                     date,
                     comment,
+                    uid,
                 }].sort((a, b) => b.date - a.date));
+
+        /*
+        db.collection('weights').add({
+            weight: parseFloat(enteredWeight),
+            date,
+            comment,
+            uid,
+        })
+         */
     };
 
     onMount(async () => {
