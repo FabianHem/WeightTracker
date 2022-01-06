@@ -1,5 +1,5 @@
 <script lang="ts">
-    import {db} from './../../util/firebase';
+    import {db} from '../../util/firebase';
     import Weeks from './Weeks.svelte';
 
     export let uid;
@@ -10,12 +10,16 @@
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
-                    weights = [...weights, data];
+                    weights = [...weights, {
+                      ...data,
+                        date: data.date.toDate(),
+                    }];
                 });
             })
             .catch((error) => {
                 console.log('Error getting docs: ', error);
             });
+
 </script>
 
 <div class="d-flex flex-column justify-center align-center">
