@@ -3,7 +3,7 @@
     import {mdiPlusThick} from '@mdi/js';
     import {onMount} from 'svelte';
     import {Datepicker} from 'svelte-mui';
-    import formatDate, {formatDateToEuropean} from '../util/DateUtil';
+    import {formatDateToEuropean} from '../util/DateUtil';
     import {db} from './../util/firebase';
 
     export let uid;

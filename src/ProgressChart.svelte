@@ -3,6 +3,7 @@
     import {ButtonGroup, ButtonGroupItem} from 'svelte-materialify';
 
     export let weights;
+    console.log('inint progress', weights);
 
     const getDateForFilter = () => {
         switch (displayIndex) {
@@ -17,21 +18,21 @@
 
     const getChartData = () => {
         datasetData = weights
-                .filter(weight =>
-                        weight.date > getDateForFilter()
-                )
-                .map(weight => {
-                    if (weight.weight > max)
-                        max = weight.weight;
+            .filter(weight =>
+                weight.date > getDateForFilter()
+            )
+            .map(weight => {
+                if (weight.weight > max)
+                    max = weight.weight;
 
-                    if (weight.weight < min)
-                        min = weight.weight;
+                if (weight.weight < min)
+                    min = weight.weight;
 
-                    return ({
-                        date: weight.date,
-                        value: weight.weight
-                    });
+                return ({
+                    date: weight.date,
+                    value: weight.weight
                 });
+            });
     };
 
     let displayIndex = 0;
@@ -47,30 +48,38 @@
     <ButtonGroupItem>1 Year</ButtonGroupItem>
     <ButtonGroupItem>All Time</ButtonGroupItem>
 </ButtonGroup>
-<LineChart
-        data={{
+{#if datasetData}
+    <LineChart
+            data={{
 	        labels: [
 	        ],
 	        datasets: [{
 	            "data": datasetData
 	            }],
         }}
-        options={{
+            options={{
 	        title: "",
 	        axes: {
 	        	left: {
 	        	  "domain": [
-	        	    min - 3,
-	        	    max + 3
+	        	    min,
+	        	    max
 	        	    ]
 	        	},
 	        	bottom: {
 	        		scaleType: "time",
 	        	},
 	        },
+	        color: {
+                scale: {
+			        'Ungrouped': '#925699',
+		        }
+	        },
 	        legend: {
 	        	"enabled": false
 	        },
-	        height: "250px"
+	        height: "400px"
 }}
-/>
+    />
+{/if}
+

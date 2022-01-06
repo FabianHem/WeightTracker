@@ -7,18 +7,18 @@
     let weights = [];
 
     db.collection('weights').where('uid', '==', uid).orderBy('date', 'desc').get()
-            .then((querySnapshot) => {
-                querySnapshot.forEach((doc) => {
-                    const data = doc.data();
-                    weights = [...weights, {
-                      ...data,
-                        date: data.date.toDate(),
-                    }];
-                });
-            })
-            .catch((error) => {
-                console.log('Error getting docs: ', error);
+        .then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                const data = doc.data();
+                weights = [...weights, {
+                    ...data,
+                    date: data.date.toDate()
+                }];
             });
+        })
+        .catch((error) => {
+            console.log('Error getting docs: ', error);
+        });
 
 </script>
 
