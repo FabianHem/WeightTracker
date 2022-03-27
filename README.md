@@ -1,4 +1,4 @@
-# Weighttracker sloppily hacked together in 2 days in Svelte without knowing Svelte 
+# Weighttracker sloppily hacked together in 2 days in Svelte using firebase without knowing either Svelte nor firebase
 
 ## Get started
 
